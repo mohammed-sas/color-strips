@@ -1,3 +1,3 @@
 import Navbar from "./navbar/Navbar";
-
-export {Navbar};
+import ImageBox from './image/ImageBox';
+export {Navbar,ImageBox};
