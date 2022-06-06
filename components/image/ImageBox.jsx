@@ -1,6 +1,8 @@
 import { Flex, Box, Button, Input,Text } from "@chakra-ui/react";
 import { useState, useRef } from "react";
 import ImageCanvas from './ImageCanvas';
+import { IconButton } from '@chakra-ui/react'
+import { BiCodeAlt } from 'react-icons/bi'
 const ImageBox = () => {
   const [imageUrl, setImageUrl] = useState("");
   const inputRef = useRef();
@@ -27,7 +29,9 @@ const ImageBox = () => {
             <ImageCanvas url={imageUrl}/>
           )}
         </Flex>
-        <Box w="5rem" h="30rem" boxShadow="base"></Box>
+        <Flex w="5rem" h="30rem" boxShadow="base" flexDirection="column" alignItems="center">
+            <IconButton aria-label="color-properties"  icon={<BiCodeAlt/>}/>
+        </Flex>
       </Flex>
       <Box>
         <Input
