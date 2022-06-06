@@ -1,11 +1,13 @@
-import { Flex, Box, Button, Input,Text } from "@chakra-ui/react";
+import { Flex, Box, Button, Input, Text } from "@chakra-ui/react";
 import { useState, useRef } from "react";
-import ImageCanvas from './ImageCanvas';
-import { IconButton } from '@chakra-ui/react'
-import { BiCodeAlt } from 'react-icons/bi'
+import ImageCanvas from "./ImageCanvas";
+import { IconButton } from "@chakra-ui/react";
+import { BiCodeAlt } from "react-icons/bi";
+import ColorInfoModal from "../color info modal/ColorInfoModal";
 const ImageBox = () => {
   const [imageUrl, setImageUrl] = useState("");
   const inputRef = useRef();
+  const [showModal, setShowModal] = useState(false);
   const uploadHandler = () => {
     inputRef.current.click();
   };
@@ -22,15 +24,31 @@ const ImageBox = () => {
       flexDirection="column"
     >
       <Flex justifyContent="center" alignItems="center" gap="1rem">
-        <Flex w="35rem" h="30rem" boxShadow="lg" justifyContent="center" alignItems="center">
+        <Flex
+          w="35rem"
+          h="30rem"
+          boxShadow="lg"
+          justifyContent="center"
+          alignItems="center"
+        >
           {imageUrl === "" ? (
             <Text>Kindly upload an image</Text>
           ) : (
-            <ImageCanvas url={imageUrl}/>
+            <ImageCanvas url={imageUrl} />
           )}
         </Flex>
-        <Flex w="5rem" h="30rem" boxShadow="base" flexDirection="column" alignItems="center">
-            <IconButton aria-label="color-properties"  icon={<BiCodeAlt/>}/>
+        <Flex
+          w="5rem"
+          h="30rem"
+          boxShadow="base"
+          flexDirection="column"
+          alignItems="center"
+        >
+          <IconButton
+            aria-label="color-properties"
+            icon={<BiCodeAlt />}
+            onClick={() => setShowModal(true)}
+          />
         </Flex>
       </Flex>
       <Box>
@@ -49,6 +67,7 @@ const ImageBox = () => {
           Upload Image{" "}
         </Button>
       </Box>
+      {showModal && <ColorInfoModal setShowModal={setShowModal} />}
     </Flex>
   );
 };
