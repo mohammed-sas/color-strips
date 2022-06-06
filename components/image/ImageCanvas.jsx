@@ -32,7 +32,7 @@ const ImageCanvas = ({ url }) => {
     for (let i of positions) {
       let x = i.x;
       let y = i.y;
-      let rgb = getRgb(x, y);
+      let rgb = getHex(x, y);
       result.push(rgb);
     }
     return result;
@@ -66,21 +66,29 @@ const ImageCanvas = ({ url }) => {
     return "#" + r + g + b;
   };
 
-  const getRgb = (x, y) => {
+  const getHex = (x, y) => {
     let params = canvasRef.current.getContext("2d");
     let squareImage = params.getImageData(x, y, 1, 1);
     let colorData = squareImage.data;
-    let rgb = rgbToHex(colorData[0], colorData[1], colorData[2]);
-    return rgb;
+    let hex = rgbToHex(colorData[0], colorData[1], colorData[2]);
+    return hex;
   };
 
-  const trackPos = (e) => {
+  const trackPos = (e,index) => {
     let parentRect = parent.current.getBoundingClientRect();
     let pickerRect = e.target.getBoundingClientRect();
     let x = pickerRect.left - parentRect.left;
     let y = pickerRect.top - parentRect.top;
-    const rgb = getRgb(x, y);
-    return rgb;
+    console.log(x,y);
+    const hex = getHex(x, y);
+
+    setPalettes(palettes.map((palette,i)=>{
+      if(i === index){
+        return hex;
+      }else{
+        return palette
+      }
+    }));
   };
   const generatePalette = () => {
     let initialXYpositions = pickersXYpos();
@@ -107,7 +115,7 @@ const ImageCanvas = ({ url }) => {
         <Draggable
           bounds="parent"
           axis="both"
-          onDrag={throttle((e, data) => trackPos(e))}
+          onDrag={throttle((e, data) => trackPos(e,0))}
         >
           <Box
             w="2rem"
@@ -124,7 +132,7 @@ const ImageCanvas = ({ url }) => {
         <Draggable
           bounds="parent"
           axis="both"
-          onDrag={throttle((e, data) => trackPos(e))}
+          onDrag={throttle((e, data) => trackPos(e,1))}
         >
           <Box
             w="2rem"
@@ -141,7 +149,7 @@ const ImageCanvas = ({ url }) => {
         <Draggable
           bounds="parent"
           axis="both"
-          onDrag={throttle((e, data) => trackPos(e))}
+          onDrag={throttle((e, data) => trackPos(e,2))}
         >
           <Box
             w="2rem"
@@ -158,7 +166,7 @@ const ImageCanvas = ({ url }) => {
         <Draggable
           bounds="parent"
           axis="both"
-          onDrag={throttle((e, data) => trackPos(e))}
+          onDrag={throttle((e, data) => trackPos(e,3))}
         >
           <Box
             w="2rem"
@@ -175,7 +183,7 @@ const ImageCanvas = ({ url }) => {
         <Draggable
           bounds="parent"
           axis="both"
-          onDrag={(e, data) => trackPos(e)}
+          onDrag={(e, data) => trackPos(e,4)}
         >
           <Box
             w="2rem"

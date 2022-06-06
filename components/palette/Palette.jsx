@@ -11,10 +11,10 @@ const Palette = ({palette}) => {
         })()
     },[palette])
     return (
-        <Flex flexDirection="column" gap={2} alignItems="center" flexBasis="20%">
-        <Box bg={palette} w="100%" h="3rem"> 
+        <Flex flexDirection="column" gap={2} alignItems="center" flexBasis="20%" >
+        <Box bg={palette} w="100%" h="4rem"> 
         </Box>
-        <Text fontWeight="bold">{colorName}</Text>
+        <Text fontWeight="bold" h="2rem" fontSize="sm" textOverflow="ellipsis" overflow="hidden" whiteSpace="nowrap">{colorName}</Text>
         {colorName===""? <Text>Loading...</Text> : <Text>{palette}</Text>}
         </Flex>
     )
