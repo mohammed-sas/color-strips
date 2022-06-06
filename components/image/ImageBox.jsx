@@ -20,7 +20,7 @@ const ImageBox = () => {
       flexDirection="column"
     >
       <Flex justifyContent="center" alignItems="center" gap="1rem">
-        <Flex w="30rem" h="30rem" boxShadow="lg" justifyContent="center" alignItems="center">
+        <Flex w="35rem" h="30rem" boxShadow="lg" justifyContent="center" alignItems="center">
           {imageUrl === "" ? (
             <Text>Kindly upload an image</Text>
           ) : (

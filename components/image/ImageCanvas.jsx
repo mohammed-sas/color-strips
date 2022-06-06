@@ -85,7 +85,6 @@ const ImageCanvas = ({ url }) => {
   const generatePalette = () => {
     let initialXYpositions = pickersXYpos();
     let imagePalattes = pickerPalettes(initialXYpositions);
-    console.log(imagePalattes);
     setPalettes(imagePalattes);
   };
   const throttle = (cb) => {
@@ -99,8 +98,8 @@ const ImageCanvas = ({ url }) => {
     };
   };
   return (
-    <Box>
-      <Box h="80%" w="100%" position="relative" ref={parent}>
+    <Box h="100%" w="100%">
+      <Box h="60%" w="100%" position="relative" ref={parent}>
         <canvas
           ref={canvasRef}
           style={{ height: "100%", width: "100%" }}
@@ -191,7 +190,7 @@ const ImageCanvas = ({ url }) => {
           ></Box>
         </Draggable>
       </Box>
-      <Flex flexDirection="row" mt="1rem" gap={1}>
+      <Flex flexDirection="row" mt="1rem" gap={1} h="7rem">
         {
           palettes.map((palette,index)=>{
             return <Palette key={palette+index} palette={palette}/>
