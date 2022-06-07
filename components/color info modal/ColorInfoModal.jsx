@@ -23,7 +23,7 @@ const ColorInfoModal = () => {
         justifyContent="space-between"
         borderRadius="1rem"
       >
-        <Tabs flexBasis="10%" orientation="vertical" variant="unstyled" align="center" h="100%">
+        <Tabs orientation="vertical" variant="unstyled" align="center" w="100%" h="100%">
           <TabList h="100%">
             {palettes.map((palette, index) => {
               return (
@@ -41,7 +41,7 @@ const ColorInfoModal = () => {
           <TabPanels>
               {
                   palettes.map((palette,index)=>{
-                      return<TabPanel>
+                      return<TabPanel w="100%" h="100%">
                           <ColorDetails palette={palette}/>
                       </TabPanel>
                        

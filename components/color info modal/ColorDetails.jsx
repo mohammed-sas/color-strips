@@ -28,32 +28,28 @@ const ColorDetails = ({ palette }) => {
   const rgb = convert.hex.rgb(palette);
 
   return (
-    <Flex flexDirection="column" w="100%" gap={5}>
-      <Text fontWeight="bold">{colorName ? colorName : "Loading..."}</Text>
-      <Box>
-        <Text>HEX</Text>
+    <Flex flexDirection="column" alignItems="center" gap={5}>
+      <Text fontSize="x-large" fontWeight="bold">{colorName ? colorName : "Loading..."}</Text>
+      <Flex w="100%" flexDirection="column" alignItems="flex-start">
+        <Text fontWeight="bold">HEX</Text>
         <Text>{palette}</Text>
-      </Box>
-      <Box>
-        <Text>hsl</Text>
+      </Flex>
+      <Flex w="100%" flexDirection="column" alignItems="flex-start">
+        <Text fontWeight="bold">hsl</Text>
         <Text>{hsl.toString()}</Text>
-      </Box>
-      <Box>
-        <Text>cmyk</Text>
+      </Flex>
+      <Flex w="100%" flexDirection="column" alignItems="flex-start">
+        <Text fontWeight="bold">cmyk</Text>
         <Text>{cmyk.toString()}</Text>
-      </Box>
-      <Box>
-        <Text>lab</Text>
+      </Flex>
+      <Flex w="100%" flexDirection="column" alignItems="flex-start">
+        <Text fontWeight="bold">lab</Text>
         <Text>{lab.toString()}</Text>
-      </Box>
-      <Box>
-        <Text>Pantone</Text>
+      </Flex>
+      <Flex w="100%" flexDirection="column" alignItems="flex-start">
+        <Text fontWeight="bold">Pantone</Text>
         <Text>{pantoneName}</Text>
-      </Box>
-      <Box>
-        <Text></Text>
-        <Text></Text>
-      </Box>
+      </Flex>
     </Flex>
   );
 };
