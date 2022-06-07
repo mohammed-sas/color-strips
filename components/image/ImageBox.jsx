@@ -2,10 +2,12 @@ import { Flex, Box, Button, Input, Text } from "@chakra-ui/react";
 import { useState, useRef } from "react";
 import ImageCanvas from "./ImageCanvas";
 import { IconButton } from "@chakra-ui/react";
-import { BiCodeAlt } from "react-icons/bi";
+import { BiCodeAlt, BiImage } from "react-icons/bi";
 import ColorInfoModal from "../color info modal/ColorInfoModal";
+import axios from "axios";
+import { usePalette } from "../../context/palette-context";
 const ImageBox = () => {
-  const [imageUrl, setImageUrl] = useState("");
+    const {url,setUrl} = usePalette();
   const inputRef = useRef();
   const [showModal, setShowModal] = useState(false);
   const uploadHandler = () => {
@@ -13,9 +15,17 @@ const ImageBox = () => {
   };
 
   const changeHandler = (e) => {
-    let url = URL.createObjectURL(e.target.files[0]);
-    setImageUrl(url);
+    let imageUrl = URL.createObjectURL(e.target.files[0]);
+    setUrl(imageUrl);
   };
+  const fetchImage=async ()=>{
+    try{
+      const response = await axios.get(" https://colors.dopely.top/api/images/random/");
+      setUrl(response.data.main)
+    }catch(error){
+      console.log(error);
+    }
+  }
   return (
     <Flex
       justifyContent="center"
@@ -31,10 +41,10 @@ const ImageBox = () => {
           justifyContent="center"
           alignItems="center"
         >
-          {imageUrl === "" ? (
+          {url === "" ? (
             <Text>Kindly upload an image</Text>
           ) : (
-            <ImageCanvas url={imageUrl} />
+            <ImageCanvas/>
           )}
         </Flex>
         <Flex
@@ -43,12 +53,16 @@ const ImageBox = () => {
           boxShadow="base"
           flexDirection="column"
           alignItems="center"
+          justifyContent="flex-start"
+          pt={5}
+          gap={5}
         >
           <IconButton
             aria-label="color-properties"
             icon={<BiCodeAlt />}
             onClick={() => setShowModal(true)}
           />
+          <IconButton aria-label="new-image" icon={<BiImage />} onClick={fetchImage} />
         </Flex>
       </Flex>
       <Box>

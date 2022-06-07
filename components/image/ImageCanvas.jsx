@@ -1,9 +1,10 @@
 import { Box, Flex, Button } from "@chakra-ui/react";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import Draggable from "react-draggable";
 import Palette from "../palette/Palette";
-import {usePalette} from '../../context/palette-context'
-const ImageCanvas = ({ url }) => {
+import { usePalette } from "../../context/palette-context";
+const ImageCanvas = () => {
+  const { palettes, setPalettes,url } = usePalette();
   const eyeDropper = new EyeDropper();
   let canvasRef = useRef();
   let parent = useRef();
@@ -19,13 +20,18 @@ const ImageCanvas = ({ url }) => {
     picker4.current,
     picker5.current,
   ];
-  const {palettes, setPalettes} = usePalette();
+  
   useEffect(() => {
+    buildImage(url);
+  }, [url]);
+
+  const buildImage = (imageUrl) => {
     setPalettes([]);
+    
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     let img = new Image();
-    img.src = `${url}`;
+    img.src = `${imageUrl}`;
     img.crossOrigin = "Anonymous";
     const drawActual = () => {
       canvas.width = img.naturalWidth;
@@ -33,7 +39,7 @@ const ImageCanvas = ({ url }) => {
       ctx.drawImage(img, 0, 0, img.width, img.height);
     };
     img.onload = drawActual;
-  }, [url]);
+  };
 
   const pickerPalettes = (positions) => {
     let result = [];
@@ -76,36 +82,35 @@ const ImageCanvas = ({ url }) => {
   };
 
   const trackPos = (e, index) => {
-    if(window.EyeDropper){
-    eyeDropper.open().then(res=>{
-       setPalettes(
-      palettes.map((palette, i) => {
-        if (i === index) {
-          return res.sRGBHex;
-        } else {
-          return palette;
-        }
-      })
-    );
-    })
-  }else{
-    let parentRect = parent.current.getBoundingClientRect();
-    let pickerRect = e.target.getBoundingClientRect();
-    let x = pickerRect.left - parentRect.left;
-    let y = pickerRect.top - parentRect.top;
-    console.log(x, y);
-    const hex = getHex(x, y);
-    setPalettes(
-      palettes.map((palette, i) => {
-        if (i === index) {
-          return hex;
-        } else {
-          return palette;
-        }
-      })
-    );
-  }
-   
+    if (window.EyeDropper) {
+      eyeDropper.open().then((res) => {
+        setPalettes(
+          palettes.map((palette, i) => {
+            if (i === index) {
+              return res.sRGBHex;
+            } else {
+              return palette;
+            }
+          })
+        );
+      });
+    } else {
+      let parentRect = parent.current.getBoundingClientRect();
+      let pickerRect = e.target.getBoundingClientRect();
+      let x = pickerRect.left - parentRect.left;
+      let y = pickerRect.top - parentRect.top;
+      console.log(x, y);
+      const hex = getHex(x, y);
+      setPalettes(
+        palettes.map((palette, i) => {
+          if (i === index) {
+            return hex;
+          } else {
+            return palette;
+          }
+        })
+      );
+    }
   };
   const generatePalette = () => {
     let initialXYpositions = pickersXYpos();
@@ -122,23 +127,24 @@ const ImageCanvas = ({ url }) => {
       }
     };
   };
-  const clickHandler = (e) => {
-    const hex = getHex(e.clientX - 100, e.clientY - 112);
-    console.log(hex);
-  };
+ 
   return (
     <Box h="100%" w="100%">
       <Box h="60%" w="100%" position="relative" ref={parent}>
         <canvas
           ref={canvasRef}
           style={{ height: "100%", width: "100%" }}
-          onClick={clickHandler}
+      
         ></canvas>
         <Draggable
           bounds="parent"
           axis="both"
-          onDrag={ window.EyeDropper ? ()=>{} :throttle((e, data) => trackPos(e, 0))}
-          onStart={window.EyeDropper? throttle((e, data) => trackPos(e, 0)) : ()=>{}}
+          onDrag={
+            window.EyeDropper ? () => {} : throttle((e, data) => trackPos(e, 0))
+          }
+          onStart={
+            window.EyeDropper ? throttle((e, data) => trackPos(e, 0)) : () => {}
+          }
         >
           <Box
             w="1.5rem"
@@ -155,8 +161,12 @@ const ImageCanvas = ({ url }) => {
         <Draggable
           bounds="parent"
           axis="both"
-          onDrag={ window.EyeDropper ? ()=>{} :throttle((e, data) => trackPos(e, 1))}
-          onStart={window.EyeDropper? throttle((e, data) => trackPos(e, 1)) : ()=>{}}
+          onDrag={
+            window.EyeDropper ? () => {} : throttle((e, data) => trackPos(e, 1))
+          }
+          onStart={
+            window.EyeDropper ? throttle((e, data) => trackPos(e, 1)) : () => {}
+          }
         >
           <Box
             w="1.5rem"
@@ -173,8 +183,12 @@ const ImageCanvas = ({ url }) => {
         <Draggable
           bounds="parent"
           axis="both"
-          onDrag={ window.EyeDropper ? ()=>{} :throttle((e, data) => trackPos(e, 2))}
-          onStart={window.EyeDropper? throttle((e, data) => trackPos(e, 2)) : ()=>{}}
+          onDrag={
+            window.EyeDropper ? () => {} : throttle((e, data) => trackPos(e, 2))
+          }
+          onStart={
+            window.EyeDropper ? throttle((e, data) => trackPos(e, 2)) : () => {}
+          }
         >
           <Box
             w="1.5rem"
@@ -191,8 +205,12 @@ const ImageCanvas = ({ url }) => {
         <Draggable
           bounds="parent"
           axis="both"
-          onDrag={ window.EyeDropper ? ()=>{} :throttle((e, data) => trackPos(e, 3))}
-          onStart={window.EyeDropper? throttle((e, data) => trackPos(e, 3)) : ()=>{}}
+          onDrag={
+            window.EyeDropper ? () => {} : throttle((e, data) => trackPos(e, 3))
+          }
+          onStart={
+            window.EyeDropper ? throttle((e, data) => trackPos(e, 3)) : () => {}
+          }
         >
           <Box
             w="1.5rem"
@@ -209,8 +227,12 @@ const ImageCanvas = ({ url }) => {
         <Draggable
           bounds="parent"
           axis="both"
-          onDrag={ window.EyeDropper ? ()=>{} :throttle((e, data) => trackPos(e, 4))}
-          onStart={window.EyeDropper? throttle((e, data) => trackPos(e, 4)) : ()=>{}}
+          onDrag={
+            window.EyeDropper ? () => {} : throttle((e, data) => trackPos(e, 4))
+          }
+          onStart={
+            window.EyeDropper ? throttle((e, data) => trackPos(e, 4)) : () => {}
+          }
         >
           <Box
             w="1.5rem"
