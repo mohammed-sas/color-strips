@@ -3,8 +3,10 @@ import { useRef, useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import Palette from "../palette/Palette";
 import { usePalette } from "../../context/palette-context";
+import convert from "color-convert";
 const ImageCanvas = () => {
   const { palettes, setPalettes, url } = usePalette();
+  const [borders,setBorders] = useState(["white","white","white","white","white"]);
   let canvasRef = useRef();
   let parent = useRef();
   let picker1 = useRef();
@@ -22,6 +24,7 @@ const ImageCanvas = () => {
 
   useEffect(() => {
     buildImage(url);
+    setBorders(["white","white","white","white","white"])
   }, [url]);
 
   const buildImage = (imageUrl) => {
@@ -76,6 +79,13 @@ const ImageCanvas = () => {
     return "#" + r + g + b;
   };
 
+  function getContrastYIQ() {
+    let rgb = palettes.map((palette) => convert.hex.rgb(palette));
+    let yiq = rgb.map((c) => (c[0] * 299 + c[1] * 587 + c[2] * 114) / 1000);
+    let pickerBorders= yiq.map(y=> y>=128 ? 'black':'white');
+    setBorders(pickerBorders);
+  }
+
   const getHex = (x, y) => {
     let ctx = canvasRef.current.getContext("2d");
     let squareImage = ctx.getImageData(x, y, 1, 1);
@@ -95,6 +105,7 @@ const ImageCanvas = () => {
     let x = (pickerRect.left - parentRect.left) * scaleX;
     let y = (pickerRect.top - parentRect.top) * scaleY;
     const hex = getHex(x, y);
+
     setPalettes(
       palettes.map((palette, i) => {
         if (i === index) {
@@ -104,6 +115,7 @@ const ImageCanvas = () => {
         }
       })
     );
+    getContrastYIQ();
   };
   const generatePalette = () => {
     let initialXYpositions = pickersXYpos();
@@ -132,13 +144,14 @@ const ImageCanvas = () => {
         <Draggable
           bounds="parent"
           axis="both"
+          disabled={palettes.length===0 && true}
           onDrag={throttle((e, data) => trackPos(e, 0))}
         >
           <Box
             w="1.5rem"
             h="1.5rem"
             bg={palettes[0] ? palettes[0] : "transparent"}
-            border="3px solid white"
+            border={`3px solid ${borders[0]}`}
             borderRadius="50%"
             position="absolute"
             top={0}
@@ -149,13 +162,14 @@ const ImageCanvas = () => {
         <Draggable
           bounds="parent"
           axis="both"
+          disabled={palettes.length===0 && true}
           onDrag={throttle((e, data) => trackPos(e, 1))}
         >
           <Box
             w="1.5rem"
             h="1.5rem"
             bg={palettes[1] ? palettes[1] : "transparent"}
-            border="3px solid white"
+            border={`3px solid ${borders[1]}`}
             borderRadius="50%"
             position="absolute"
             top={0}
@@ -166,13 +180,14 @@ const ImageCanvas = () => {
         <Draggable
           bounds="parent"
           axis="both"
+          disabled={palettes.length===0 && true}
           onDrag={throttle((e, data) => trackPos(e, 2))}
         >
           <Box
             w="1.5rem"
             h="1.5rem"
             bg={palettes[2] ? palettes[2] : "transparent"}
-            border="3px solid white"
+            border={`3px solid ${borders[2]}`}
             borderRadius="50%"
             position="absolute"
             bottom={20}
@@ -183,13 +198,14 @@ const ImageCanvas = () => {
         <Draggable
           bounds="parent"
           axis="both"
+          disabled={palettes.length===0 && true}
           onDrag={throttle((e, data) => trackPos(e, 3))}
         >
           <Box
             w="1.5rem"
             h="1.5rem"
             bg={palettes[3] ? palettes[3] : "transparent"}
-            border="3px solid white"
+            border={`3px solid ${borders[3]}`}
             borderRadius="50%"
             position="absolute"
             top={0}
@@ -200,13 +216,14 @@ const ImageCanvas = () => {
         <Draggable
           bounds="parent"
           axis="both"
+          disabled={palettes.length===0 && true}
           onDrag={throttle((e, data) => trackPos(e, 4))}
         >
           <Box
             w="1.5rem"
             h="1.5rem"
             bg={palettes[4] ? palettes[4] : "transparent"}
-            border="3px solid white"
+            border={`3px solid ${borders[4]}`}
             borderRadius="50%"
             position="absolute"
             top={0}
