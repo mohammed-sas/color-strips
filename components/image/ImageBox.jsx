@@ -7,7 +7,7 @@ import ColorInfoModal from "../color info modal/ColorInfoModal";
 import axios from "axios";
 import { usePalette } from "../../context/palette-context";
 const ImageBox = () => {
-    const {url,setUrl} = usePalette();
+    const {url,setUrl,palettes} = usePalette();
   const inputRef = useRef();
   const [showModal, setShowModal] = useState(false);
   const uploadHandler = () => {
@@ -60,6 +60,7 @@ const ImageBox = () => {
           <IconButton
             aria-label="color-properties"
             icon={<BiCodeAlt />}
+            disabled={palettes.length ===0 ? true : false}
             onClick={() => setShowModal(true)}
           />
           <IconButton aria-label="new-image" icon={<BiImage />} onClick={fetchImage} />
