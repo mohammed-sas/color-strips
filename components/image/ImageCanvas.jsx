@@ -1,5 +1,5 @@
 import { Box, Flex, Button } from "@chakra-ui/react";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import Palette from "../palette/Palette";
 import { usePalette } from "../../context/palette-context";
@@ -26,7 +26,6 @@ const ImageCanvas = () => {
 
   const buildImage = (imageUrl) => {
     setPalettes([]);
-
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     let img = new Image();
@@ -111,6 +110,7 @@ const ImageCanvas = () => {
     let imagePalattes = pickerPalettes(initialXYpositions);
     setPalettes(imagePalattes);
   };
+
   const throttle = (cb) => {
     let timer = false;
     return (...args) => {
@@ -150,7 +150,6 @@ const ImageCanvas = () => {
           bounds="parent"
           axis="both"
           onDrag={throttle((e, data) => trackPos(e, 1))}
-        
         >
           <Box
             w="1.5rem"
@@ -221,7 +220,7 @@ const ImageCanvas = () => {
           return <Palette key={palette + index} palette={palette} />;
         })}
       </Flex>
-      <Box mt="1rem">
+      <Box mt="1rem" textAlign="center">
         <Button onClick={generatePalette} colorScheme="messenger">
           Generate Palatte
         </Button>

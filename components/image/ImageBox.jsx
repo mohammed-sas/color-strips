@@ -1,8 +1,8 @@
-import { Flex, Box, Button, Input, Text ,Spinner} from "@chakra-ui/react";
+import { Flex, Box, Button, Input, Text ,Spinner,Tooltip} from "@chakra-ui/react";
 import { useState, useRef } from "react";
 import ImageCanvas from "./ImageCanvas";
 import { IconButton } from "@chakra-ui/react";
-import { BiCodeAlt, BiImage } from "react-icons/bi";
+import { BiCodeAlt, BiImage,BiUpload } from "react-icons/bi";
 import ColorInfoModal from "../color info modal/ColorInfoModal";
 import axios from "axios";
 import { usePalette } from "../../context/palette-context";
@@ -50,20 +50,27 @@ const ImageBox = () => {
         <Flex
           w="5rem"
           h="30rem"
-          boxShadow="base"
           flexDirection="column"
           alignItems="center"
           justifyContent="flex-start"
           pt={5}
           gap={5}
         >
-          <IconButton
-            aria-label="color-properties"
-            icon={<BiCodeAlt />}
-            disabled={palettes.length ===0 ? true : false}
-            onClick={() => setShowModal(true)}
-          />
-          <IconButton aria-label="new-image" icon={<BiImage />} onClick={fetchImage} />
+          <Tooltip placement="right" label="upload image">
+            <IconButton icon={<BiUpload/>} bgColor="#0078ff" color="#fff" onClick={uploadHandler} />
+          </Tooltip>
+          <Tooltip placement="right" label="view properties">
+            <IconButton
+          
+              icon={<BiCodeAlt />}
+              disabled={palettes.length ===0 ? true : false}
+              onClick={() => setShowModal(true)}
+            />
+          </Tooltip>
+
+          <Tooltip placement="right" label="next image">
+            <IconButton  icon={<BiImage />} onClick={fetchImage} />
+          </Tooltip>
         </Flex>
       </Flex>
       <Box>
@@ -73,14 +80,6 @@ const ImageBox = () => {
           ref={inputRef}
           onChange={changeHandler}
         />
-        <Button
-          variant="solid"
-          colorScheme="messenger"
-          color="white"
-          onClick={uploadHandler}
-        >
-          Upload Image{" "}
-        </Button>
       </Box>
       {showModal && <ColorInfoModal setShowModal={setShowModal} />}
     </Flex>
