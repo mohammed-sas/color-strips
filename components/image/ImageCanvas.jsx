@@ -85,6 +85,7 @@ const ImageCanvas = () => {
   };
 
   const trackPos = (e, index) => {
+    setActive(index);
     let parentRect = parent.current.getBoundingClientRect();
     let pickerRect = e.target.getBoundingClientRect();
     let scaleX =
