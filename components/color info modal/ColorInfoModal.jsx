@@ -2,7 +2,7 @@ import { Box, Flex, Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/r
 import { useState } from "react";
 import { usePalette } from "../../context/palette-context";
 import ColorDetails from "./ColorDetails";
-const ColorInfoModal = () => {
+const ColorInfoModal = ({setShowModal}) => {
   const { palettes } = usePalette();
   const [activePalette, setActivePalette] = useState("");
   return (
@@ -15,6 +15,7 @@ const ColorInfoModal = () => {
       bg="rgba(0,0,0,0.5)"
       justifyContent="center"
       alignItems="center"
+      onClick={()=>setShowModal(false)}
     >
       <Flex
         h="80%"
@@ -22,6 +23,7 @@ const ColorInfoModal = () => {
         bg="white"
         justifyContent="space-between"
         borderRadius="1rem"
+        onClick={e=>e.stopPropagation()}
       >
         <Tabs orientation="vertical" variant="unstyled" align="center" w="100%" h="100%">
           <TabList h="100%">
