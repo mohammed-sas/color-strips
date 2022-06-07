@@ -1,4 +1,4 @@
-import { Flex, Box, Button, Input, Text } from "@chakra-ui/react";
+import { Flex, Box, Button, Input, Text ,Spinner} from "@chakra-ui/react";
 import { useState, useRef } from "react";
 import ImageCanvas from "./ImageCanvas";
 import { IconButton } from "@chakra-ui/react";
@@ -42,7 +42,7 @@ const ImageBox = () => {
           alignItems="center"
         >
           {url === "" ? (
-            <Text>Kindly upload an image</Text>
+            <Spinner size="xl" color="#0078ff" />
           ) : (
             <ImageCanvas/>
           )}
