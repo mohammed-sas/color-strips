@@ -6,7 +6,13 @@ import { usePalette } from "../../context/palette-context";
 import convert from "color-convert";
 const ImageCanvas = () => {
   const { palettes, setPalettes, url } = usePalette();
-  const [borders,setBorders] = useState(["white","white","white","white","white"]);
+  const [borders, setBorders] = useState([
+    "white",
+    "white",
+    "white",
+    "white",
+    "white",
+  ]);
   let canvasRef = useRef();
   let parent = useRef();
   let picker1 = useRef();
@@ -24,7 +30,7 @@ const ImageCanvas = () => {
 
   useEffect(() => {
     buildImage(url);
-    setBorders(["white","white","white","white","white"])
+    setBorders(["white", "white", "white", "white", "white"]);
   }, [url]);
 
   const buildImage = (imageUrl) => {
@@ -82,7 +88,7 @@ const ImageCanvas = () => {
   function getContrastYIQ() {
     let rgb = palettes.map((palette) => convert.hex.rgb(palette));
     let yiq = rgb.map((c) => (c[0] * 299 + c[1] * 587 + c[2] * 114) / 1000);
-    let pickerBorders= yiq.map(y=> y>=128 ? 'black':'white');
+    let pickerBorders = yiq.map((y) => (y >= 128 ? "black" : "white"));
     setBorders(pickerBorders);
   }
 
@@ -144,7 +150,7 @@ const ImageCanvas = () => {
         <Draggable
           bounds="parent"
           axis="both"
-          disabled={palettes.length===0 && true}
+          disabled={palettes.length === 0 && true}
           onDrag={throttle((e, data) => trackPos(e, 0))}
         >
           <Box
@@ -162,7 +168,7 @@ const ImageCanvas = () => {
         <Draggable
           bounds="parent"
           axis="both"
-          disabled={palettes.length===0 && true}
+          disabled={palettes.length === 0 && true}
           onDrag={throttle((e, data) => trackPos(e, 1))}
         >
           <Box
@@ -180,7 +186,7 @@ const ImageCanvas = () => {
         <Draggable
           bounds="parent"
           axis="both"
-          disabled={palettes.length===0 && true}
+          disabled={palettes.length === 0 && true}
           onDrag={throttle((e, data) => trackPos(e, 2))}
         >
           <Box
@@ -198,7 +204,7 @@ const ImageCanvas = () => {
         <Draggable
           bounds="parent"
           axis="both"
-          disabled={palettes.length===0 && true}
+          disabled={palettes.length === 0 && true}
           onDrag={throttle((e, data) => trackPos(e, 3))}
         >
           <Box
@@ -216,7 +222,7 @@ const ImageCanvas = () => {
         <Draggable
           bounds="parent"
           axis="both"
-          disabled={palettes.length===0 && true}
+          disabled={palettes.length === 0 && true}
           onDrag={throttle((e, data) => trackPos(e, 4))}
         >
           <Box
@@ -238,7 +244,11 @@ const ImageCanvas = () => {
         })}
       </Flex>
       <Box mt="1rem" textAlign="center">
-        <Button onClick={generatePalette} colorScheme="messenger">
+        <Button
+          onClick={generatePalette}
+          colorScheme="messenger"
+          disabled={palettes.length !== 0 && true}
+        >
           Generate Palatte
         </Button>
       </Box>
