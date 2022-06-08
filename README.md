@@ -20,7 +20,7 @@ A palette generator app where user could generate palettes from images uploaded 
 1. Share palettes generated in Following social media platform  
     a.Twitter  
     b.Whatsapp
-
+1. Responsive app
 
     
 

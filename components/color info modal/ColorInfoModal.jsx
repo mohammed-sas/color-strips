@@ -26,7 +26,7 @@ const ColorInfoModal = ({ setShowModal }) => {
     >
       <Flex
         h="80%"
-        w={{base:"80%",md:"30%"}}
+        w={{ base: "80%", md: "30%" }}
         bg="white"
         justifyContent="space-between"
         borderRadius="1rem"
@@ -63,16 +63,15 @@ const ColorInfoModal = ({ setShowModal }) => {
               );
             })}
           </TabPanels>
-          
         </Tabs>
         <IconButton
-            icon={<BiXCircle />}
-            position="absolute"
-            top={1}
-            right={1}
-            borderRadius="1rem"
-            onClick={() => setShowModal(false)}
-          />
+          icon={<BiXCircle />}
+          position="absolute"
+          top={1}
+          right={1}
+          borderRadius="1rem"
+          onClick={() => setShowModal(false)}
+        />
       </Flex>
     </Flex>
   );

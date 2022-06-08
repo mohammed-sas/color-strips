@@ -141,7 +141,7 @@ const ImageCanvas = () => {
   };
 
   return (
-    <Box h="100%" w={{base:"90%",lg:"100%"}}>
+    <Box h="100%" w={{ base: "90%", lg: "100%" }}>
       <Box h="60%" w="100%" position="relative" ref={parent}>
         <canvas
           ref={canvasRef}
