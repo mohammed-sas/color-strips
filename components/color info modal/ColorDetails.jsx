@@ -44,7 +44,7 @@ const ColorDetails = ({ palette }) => {
     });
   };
   return (
-    <Flex flexDirection="column" alignItems="center" gap={5}>
+    <Flex flexDirection="column" alignItems="center" gap={5} >
       <Text fontSize="x-large" fontWeight="bold">
         {colorName ? colorName : "Loading..."}
       </Text>

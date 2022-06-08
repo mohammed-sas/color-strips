@@ -25,7 +25,7 @@ const ColorInfoModal = ({ setShowModal }) => {
       onClick={() => setShowModal(false)}
     >
       <Flex
-        h="80%"
+        h="max-content"
         w={{ base: "80%", md: "30%" }}
         bg="white"
         justifyContent="space-between"
@@ -38,10 +38,9 @@ const ColorInfoModal = ({ setShowModal }) => {
           variant="unstyled"
           align="center"
           w="100%"
-          h="100%"
           defaultIndex={0}
         >
-          <TabList h="100%">
+          <TabList h="100%" p={5}>
             {palettes.map((palette, index) => {
               return (
                 <Tab
