@@ -45,10 +45,10 @@ const ImageBox = () => {
       gap="1rem"
       flexDirection="column"
     >
-      <Flex justifyContent="center" alignItems="center" gap="1rem">
+      <Flex justifyContent="center" alignItems="center" gap="1rem" flexDirection={{base:"column",lg:"row"}}>
         <Flex
-          w="35rem"
-          h="30rem"
+          w={{base:"25rem",lg:"30rem"}}
+          h={{base:"30rem",lg:"30rem"}}
           boxShadow="lg"
           justifyContent="center"
           alignItems="center"
@@ -56,9 +56,7 @@ const ImageBox = () => {
           {url === "" ? <Spinner size="xl" color="#0078ff" /> : <ImageCanvas />}
         </Flex>
         <Flex
-          w="5rem"
-          h="30rem"
-          flexDirection="column"
+          flexDirection={{base:"row",lg:"column"}}
           alignItems="center"
           justifyContent="flex-start"
           pt={5}

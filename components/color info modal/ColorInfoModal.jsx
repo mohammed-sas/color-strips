@@ -26,7 +26,7 @@ const ColorInfoModal = ({ setShowModal }) => {
     >
       <Flex
         h="80%"
-        w="30%"
+        w={{base:"80%",md:"30%"}}
         bg="white"
         justifyContent="space-between"
         borderRadius="1rem"

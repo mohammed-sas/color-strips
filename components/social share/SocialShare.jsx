@@ -44,6 +44,7 @@ const SocialShare = ({ setShowSocial }) => {
           justifyContent="center"
           gap={10}
           position="relative"
+          pl="5px"
         >
           <IconButton
             icon={<BiXCircle />}
