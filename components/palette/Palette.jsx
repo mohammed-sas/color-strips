@@ -14,7 +14,7 @@ const Palette = ({palette}) => {
         <Flex flexDirection="column" gap={2} alignItems="center" flexBasis="20%" flexGrow={0}>
         <Box bg={palette} w="100%" h="4rem"> 
         </Box>
-        <Text fontWeight="bold" h="2rem" w={{base:"4rem",md:"5rem"}} fontSize="sm" textOverflow="ellipsis" overflow="hidden" whiteSpace="nowrap">{colorName}</Text>
+        <Text fontWeight="bold" h="2rem" w={{base:"4rem",lg:"5rem"}} fontSize="sm" textOverflow="ellipsis" overflow="hidden" whiteSpace="nowrap">{colorName}</Text>
         {colorName===""? <Text>Loading...</Text> : <Text>{palette}</Text>}
         </Flex>
     )

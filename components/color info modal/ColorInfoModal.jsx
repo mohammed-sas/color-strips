@@ -70,6 +70,7 @@ const ColorInfoModal = ({ setShowModal }) => {
             position="absolute"
             top={1}
             right={1}
+            borderRadius="1rem"
             onClick={() => setShowModal(false)}
           />
       </Flex>

@@ -51,6 +51,7 @@ const SocialShare = ({ setShowSocial }) => {
             position="absolute"
             top={1}
             right={1}
+            borderRadius="1rem"
             onClick={() => setShowSocial(false)}
           />
           <Text fontWeight="bold" fontSize="lg">
