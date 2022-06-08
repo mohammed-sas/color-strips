@@ -5,9 +5,11 @@ import {
   Tab,
   TabPanels,
   TabPanel,
+  IconButton,
 } from "@chakra-ui/react";
 import { usePalette } from "../../context/palette-context";
 import ColorDetails from "./ColorDetails";
+import { BiXCircle } from "react-icons/bi";
 const ColorInfoModal = ({ setShowModal }) => {
   const { palettes } = usePalette();
   return (
@@ -29,6 +31,7 @@ const ColorInfoModal = ({ setShowModal }) => {
         justifyContent="space-between"
         borderRadius="1rem"
         onClick={(e) => e.stopPropagation()}
+        position="relative"
       >
         <Tabs
           orientation="vertical"
@@ -60,7 +63,15 @@ const ColorInfoModal = ({ setShowModal }) => {
               );
             })}
           </TabPanels>
+          
         </Tabs>
+        <IconButton
+            icon={<BiXCircle />}
+            position="absolute"
+            top={1}
+            right={1}
+            onClick={() => setShowModal(false)}
+          />
       </Flex>
     </Flex>
   );
