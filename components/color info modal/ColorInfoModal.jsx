@@ -36,6 +36,7 @@ const ColorInfoModal = ({ setShowModal }) => {
           align="center"
           w="100%"
           h="100%"
+          defaultIndex={0}
         >
           <TabList h="100%">
             {palettes.map((palette, index) => {

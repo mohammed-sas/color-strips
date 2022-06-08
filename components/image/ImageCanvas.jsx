@@ -160,8 +160,8 @@ const ImageCanvas = () => {
             border={`3px solid ${borders[0]}`}
             borderRadius="50%"
             position="absolute"
-            top={0}
-            left={0}
+            top="5%"
+            left="5%"
             ref={picker1}
           ></Box>
         </Draggable>
@@ -178,8 +178,8 @@ const ImageCanvas = () => {
             border={`3px solid ${borders[1]}`}
             borderRadius="50%"
             position="absolute"
-            top={0}
-            left={30}
+            top="30%"
+            left="20%"
             ref={picker2}
           ></Box>
         </Draggable>
@@ -196,8 +196,8 @@ const ImageCanvas = () => {
             border={`3px solid ${borders[2]}`}
             borderRadius="50%"
             position="absolute"
-            bottom={20}
-            left={0}
+            bottom="10%"
+            left="60%"
             ref={picker3}
           ></Box>
         </Draggable>
@@ -214,8 +214,8 @@ const ImageCanvas = () => {
             border={`3px solid ${borders[3]}`}
             borderRadius="50%"
             position="absolute"
-            top={0}
-            right={0}
+            top="25%"
+            right="5%"
             ref={picker4}
           ></Box>
         </Draggable>
@@ -232,8 +232,8 @@ const ImageCanvas = () => {
             border={`3px solid ${borders[4]}`}
             borderRadius="50%"
             position="absolute"
-            top={0}
-            right={20}
+            top="5%"
+            right="30%"
             ref={picker5}
           ></Box>
         </Draggable>

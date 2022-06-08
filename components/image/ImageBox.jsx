@@ -97,6 +97,7 @@ const ImageBox = () => {
           display="none"
           ref={inputRef}
           onChange={changeHandler}
+          accept="image/png, image/jpeg"
         />
       </Box>
       {showModal && <ColorInfoModal setShowModal={setShowModal} />}
