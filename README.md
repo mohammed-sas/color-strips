@@ -1,7 +1,11 @@
 
 # Color Strips
 
-A palette generator app where user could generate palettes from images uploaded by the user or from images fetched by the app.
+A palette generator app where user could generate palettes from images uploaded by the user or from images fetched by the app.  
+
+## Demo
+![demo](https://user-images.githubusercontent.com/89216938/172672851-8817e31b-183b-4a5d-b3b5-7130b94c1766.gif)
+  
 ## Tech Stack
 1.NextJS   
 2.React Context API + useReducer  
